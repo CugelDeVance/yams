@@ -191,11 +191,7 @@ function content()
                     input.setAttribute("min",yams_array[item].min);
                     input.setAttribute("max",yams_array[item].max);
                     input.setAttribute("step",yams_array[item].step);
-                    if(score!==null){
-                        if(score[yams_array[item].name]!==null){
-                            input.setAttribute("value",score[yams_array[item].name]);
-                        }
-                    }
+                    
                     valeur.append(input);
                     input.onchange = function(){updateTotal(player)};
                 }else if(yams_array[item].type=="choice"){
@@ -293,7 +289,7 @@ function content()
                 var num_joueur = yams_table.rows[1].cells.length;
                 var new_player = event.target.value;
                 if(new_player!=""){
-                    addPlayer(new_player+ "_" + num_joueur,null);
+                    addPlayer(new_player,null);
                     event.target.value = "";
                 }else{
                     addPlayer("Terrien"+ "_" + num_joueur,null);
@@ -314,7 +310,7 @@ function content()
             var num_joueur = yams_table.rows[1].cells.length;
             var new_player = event.target.parentElement.firstChild.value;
             if(new_player!=""){
-                addPlayer(new_player+ "_" + num_joueur,null);
+                addPlayer(new_player,null);
                 event.target.parentElement.firstChild.value = "";
             }else{
                 addPlayer("Terrien"+ "_" + num_joueur,null);
@@ -351,6 +347,7 @@ function content()
         div_overflow.append(yams_table);
         yams_app.append(div_overflow);
         
+        clearScore()
         clearButton()
     }
     
@@ -360,7 +357,7 @@ function content()
     function clearButton(){
         var button_clear = document.createElement("button");
         button_clear.setAttribute("id","button_clear");
-        button_clear.innerHTML = "Effacer les scores ❌"
+        button_clear.innerHTML = "Nouvelle partie"
         button_clear.onclick = function(){
             setYamsScores({});
             location.reload(); 
@@ -368,4 +365,17 @@ function content()
                 
         yams_app.append(button_clear);
     }
+
+    function clearScore(){
+        var button_clearScore = document.createElement("button");
+        button_clearScore.setAttribute("class","boutton_bottom");
+        button_clearScore.setAttribute("id","button_clear_score");
+        button_clearScore.innerHTML = "Effacer les scores ❌"
+        button_clearScore.onclick = function(){
+            location.reload(); 
+        }
+                
+        yams_app.append(button_clearScore);
+    }
+    
 }

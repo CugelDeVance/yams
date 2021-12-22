@@ -92,6 +92,10 @@ thead th,thead tr {
     cursor: pointer;
 }
 
+.boutton_bottom{
+    margin-bottom: 1em;
+}
+
 .td_input {
     text-align: center;
 }
